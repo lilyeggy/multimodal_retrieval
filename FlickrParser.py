@@ -114,6 +114,12 @@ class FlickrParser:
                     "category": entity['category'],
                     "text_phrase": entity['text_phrase'], 
                     "bounding_box": bboxes_by_id[entity_id] 
+                },
+                {
+                    "type": "caption",
+                    "image_id": image_name,
+                    "caption_id": i,
+                    "caption": caption
                 }
             ]
         }

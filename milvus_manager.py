@@ -103,11 +103,13 @@ class MilvusManager:
         """
         为向量字段创建索引
         向量字段包括：image_embedding, text_embedding
+
+        构建索引的时候使用的metric_type要和搜索的时候的metric_type一致
         """
         index_params = {
             "index_type": "IVF_FLAT", # 采用IVF索引
             "metric_type": "IP",  # 余弦相似度，适合归一化后的向量
-            "params": {"nlist": 128} # 索引列表大小
+            "params": {"nlist": 128} # 索引列表大小,nlist表示聚类中心的数量
         }
         self.collection.create_index(
             field_name=field_name,
