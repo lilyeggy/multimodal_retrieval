@@ -158,12 +158,12 @@ class FlickrSearcher:
 
         # 执行搜索
         results = self.collection.search(
-            data=[query_embedding_list],
-            anns_field=search_type,
-            param=search_params,
-            limit=top_k,
-            expr=filter_expr,
-            output_fields=[
+            data=[query_embedding_list],  # ① 查询向量
+            anns_field=search_type,   # ② 在哪个列搜索
+            param=search_params,   # ③ 如何搜索
+            limit=top_k,    # ④ 返回多少行
+            expr=filter_expr,    # ⑤ 过滤条件（可选）
+            output_fields=[      # ⑥ 返回哪些列
                 "type",
                 "image_id",
                 "text_phrase",

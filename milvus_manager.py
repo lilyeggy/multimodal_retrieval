@@ -72,8 +72,8 @@ class MilvusManager:
             categories.append(data["category"])
 
             # Milvus要求向量一定要是list 或 numpy.array
-            img_emb = data_list["image_embedding"]
-            txt_embd = data_list["text_embedding"]
+            img_emb = data["image_embedding"]
+            txt_embd = data["text_embedding"]
 
             # 检查img_emb和text_emb的类型
             if hasattr(img_emb,'cpu'):
@@ -90,6 +90,9 @@ class MilvusManager:
             text_embeddings.append(txt_embd)
 
         # 插入数据
+        # 为什么要组织成这样的数据格式，是因为milvus要求插入的数据格式是list of list
+        # Milvus插入数据是一列一列插入的，同字段数据连续存放
+        # 注意milvus不接受行式插入
         entities = [
             types,image_ids,entity_ids,text_phrases,captions,categories,bounding_boxes,
             image_embeddings,text_embeddings
